@@ -12,7 +12,8 @@
 fibonacci:
 	@ ADD/MODIFY CODE BELOW
 	@ PROLOG
-       push {r7,r8,lr}
+       @push {r7,r8,lr}
+       stmfd sp!,{r7,r8,lr}
        mov r7,r0;
        cmp r7,#1 @check if input arguement x is less or equal(LE) 1
        beq equal1
@@ -26,14 +27,14 @@ fibonacci:
        bl fibonacci @@call
 
        add r0,r8,r0;
-       pop {r7,r8,pc}
+       ldmfd sp!,{r7,r8,pc}
 
 
 less1: mov r0,#0
-       pop {r7,r8,pc}
+       ldmfd sp!,{r7,r8,pc}
 
 equal1: mov r0,#1
-        pop {r7,r8,pc}
+        ldmfd sp!,{r7,r8,pc}
 
        .size fibonacci, .-fibonacci
 	.end
